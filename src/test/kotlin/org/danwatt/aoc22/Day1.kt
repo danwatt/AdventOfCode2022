@@ -2,6 +2,7 @@ package org.danwatt.aoc22
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.util.concurrent.atomic.AtomicInteger
 
 typealias Calories = Int
 
@@ -10,23 +11,21 @@ data class Elf(private val inventory: List<Calories>) {
 }
 
 class Day1 {
+    val elves =
+        loadLines("day1.txt")
+            .chunkedBy { it.isBlank() }
+            .map { group -> group.map { it.toInt() } }
+            .map(::Elf)
+
     @Test
     fun part1() {
-        val items =
-            loadIntegersWithEmptyLinesWithNullConversion("day1.txt") { -1 }
-
-        val elves = items
-            .chunkedBy { it == -1 }
-            .map(::Elf)
         val most = elves.maxBy { it.total }
         assertThat(most.total).isEqualTo(70369)
     }
 
     @Test
     fun part2() {
-        val totalTop3 = loadIntegersWithEmptyLinesWithNullConversion("day1.txt") { -1 }
-            .chunkedBy { it == -1 }
-            .map(::Elf)
+        val totalTop3 = elves
             .sortedByDescending { it.total }
             .take(3)
             .sumOf { it.total }
