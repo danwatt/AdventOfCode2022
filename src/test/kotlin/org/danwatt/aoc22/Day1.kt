@@ -2,19 +2,19 @@ package org.danwatt.aoc22
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.concurrent.atomic.AtomicInteger
 
-typealias Calories = Int
+@JvmInline
+value class Calories(val c: Int)
 
 data class Elf(private val inventory: List<Calories>) {
-    val total get() = inventory.sumOf { it }
+    val total get() = inventory.sumOf { it.c }
 }
 
 class Day1 {
     val elves =
         loadLines("day1.txt")
             .chunkedBy { it.isBlank() }
-            .map { group -> group.map { it.toInt() } }
+            .map { group -> group.map { Calories(it.toInt()) } }
             .map(::Elf)
 
     @Test
