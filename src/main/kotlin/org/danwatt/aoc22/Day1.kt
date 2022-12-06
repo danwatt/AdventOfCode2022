@@ -1,8 +1,5 @@
 package org.danwatt.aoc22
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
-
 @JvmInline
 value class Calories(val c: Int)
 
@@ -10,27 +7,22 @@ data class Elf(private val inventory: List<Calories>) {
     val total get() = inventory.sumOf { it.c }
 }
 
-class Day1 {
-    val elves =
-        loadLines("day1.txt")
-            .chunkedBy { it.isBlank() }
+class Day1 : AocDay {
+    override fun part1(input: List<String>): Int =
+        input.chunkedBy { it.isBlank() }
             .map { group -> group.map { Calories(it.toInt()) } }
             .map(::Elf)
+            .maxBy { it.total }
+            .total
 
-    @Test
-    fun part1() {
-        val most = elves.maxBy { it.total }
-        assertThat(most.total).isEqualTo(70369)
-    }
-
-    @Test
-    fun part2() {
-        val totalTop3 = elves
+    override fun part2(input: List<String>): Int =
+        input.chunkedBy { it.isBlank() }
+            .asSequence()
+            .map { group -> group.map { Calories(it.toInt()) } }
+            .map(::Elf)
             .sortedByDescending { it.total }
             .take(3)
             .sumOf { it.total }
-        assertThat(totalTop3).isEqualTo(203002)
-    }
 }
 
 private fun <T> Iterable<T>.chunkedBy(delimiterPredicate: (T) -> Boolean): Iterable<List<T>> {
