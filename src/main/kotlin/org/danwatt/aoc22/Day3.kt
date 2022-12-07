@@ -1,6 +1,6 @@
 package org.danwatt.aoc22
 
-class Day3 : AocDay {
+class Day3 : AocDay<Int> {
     override fun part1(input: List<String>): Int =
         input.sumOf { rucksack ->
             val compartment1 = rucksack.substring(0, rucksack.length / 2).toSet()

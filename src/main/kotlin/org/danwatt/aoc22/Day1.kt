@@ -7,7 +7,7 @@ data class Elf(private val inventory: List<Calories>) {
     val total get() = inventory.sumOf { it.c }
 }
 
-class Day1 : AocDay {
+class Day1 : AocDay<Int> {
     override fun part1(input: List<String>): Int =
         input.chunkedBy { it.isBlank() }
             .map { group -> group.map { Calories(it.toInt()) } }

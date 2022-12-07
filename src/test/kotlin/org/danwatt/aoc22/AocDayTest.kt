@@ -4,12 +4,12 @@ import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-abstract class AocDayTest(
-    val day: AocDay,
-    val testCasePart1: Int = 0,
-    val actualPart1: Int = 0,
-    val testCasePart2: Int = 0,
-    val actualPart2: Int = 0,
+abstract class AocDayTest<T>(
+    val day: AocDay<T>,
+    val testCasePart1: T,
+    val actualPart1: T,
+    val testCasePart2: T,
+    val actualPart2: T,
 ) {
 
     fun loadLines(): List<String> = loadLines("${day.javaClass.simpleName.lowercase()}.txt")

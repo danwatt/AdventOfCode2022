@@ -1,6 +1,6 @@
 package org.danwatt.aoc22
 
-class Day4Test : AocDayTest(
+class Day4Test : AocDayTest<Int>(
     Day4(),
     2,
     503,

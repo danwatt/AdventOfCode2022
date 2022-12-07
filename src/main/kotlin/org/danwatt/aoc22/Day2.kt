@@ -1,6 +1,6 @@
 package org.danwatt.aoc22
 
-class Day2 : AocDay {
+class Day2 : AocDay<Int> {
     override fun part1(input: List<String>): Int =
         input.map { it.parsePart1Scenario() }
             .sumOf { (theirPlay, ourPlay) ->
