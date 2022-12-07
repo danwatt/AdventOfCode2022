@@ -1,6 +1,7 @@
 package org.danwatt.aoc22
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 abstract class AocDayTest(
@@ -16,22 +17,21 @@ abstract class AocDayTest(
 
     @Test
     fun testCase1() {
-        Assertions.assertThat(day.part1(loadTestLines())).isEqualTo(testCasePart1)
+        assertThat(day.part1(loadTestLines())).isEqualTo(testCasePart1)
     }
 
     @Test
     fun part1() {
-        Assertions.assertThat(day.part1(loadLines())).isEqualTo(actualPart1)
+        assertThat(day.part1(loadLines())).isEqualTo(actualPart1)
     }
 
     @Test
     fun testCase2() {
-        Assertions.assertThat(day.part2(loadTestLines())).isEqualTo(testCasePart2)
-
+        assertThat(day.part2(loadTestLines())).isEqualTo(testCasePart2)
     }
 
     @Test
     fun part2() {
-        Assertions.assertThat(day.part2(loadLines())).isEqualTo(actualPart2)
+        assertThat(day.part2(loadLines())).isEqualTo(actualPart2)
     }
 }
