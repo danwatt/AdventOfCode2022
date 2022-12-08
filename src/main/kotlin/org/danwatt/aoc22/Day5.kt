@@ -31,11 +31,10 @@ class Day5 : AocDay<String> {
 
     private fun parseMoves(input: List<String>): List<Move> =
         input.filter { it.startsWith("move") }
-            .map { line ->
-                line.split(' ')
+            .map {
+                it.split(' ')
                     .filterIndexed { index, _ -> index % 2 == 1 }
-                    .map { it.toInt() }
-            }.map { Move(it[0], it[1] - 1, it[2] - 1) }
+            }.map { Move(it[0].toInt(), it[1].toInt() - 1, it[2].toInt() - 1) }
 
     private fun parseStacks(input: List<String>): List<Stack<Char>> {
         val digitLine = input.indexOfFirst { it.contains('1') }

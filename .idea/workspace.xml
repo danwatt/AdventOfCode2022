@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a99fa6-67a1-4694-b485-ad8646dbdff6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day7.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day7.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/org/danwatt/aoc22/Day6Test.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/org/danwatt/aoc22/Day6Test.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day5.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day6.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/danwatt/aoc22/Day6.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +40,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -77,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670472863580</updated>
-      <workItem from="1670472864608" duration="543000" />
+      <workItem from="1670472864608" duration="1038000" />
     </task>
     <servers />
   </component>
