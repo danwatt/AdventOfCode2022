@@ -6,18 +6,25 @@ sealed class FilesystemEntry
 
 class File(val size: Int) : FilesystemEntry() {}
 class Directory(
-    val entries: MutableMap<String, FilesystemEntry> = mutableMapOf(),
-) : FilesystemEntry() {
-    fun totalSize(): Int = entries.values.sumOf {
+    val children: MutableMap<String, FilesystemEntry> = mutableMapOf(),
+    val size: Int = 0,
+) : FilesystemEntry(), Iterable<FilesystemEntry> {
+    fun totalSize(): Int = children.values.sumOf {
         when (it) {
             is File -> it.size
             is Directory -> it.totalSize()
         }
     }
 
-    fun flattenDirectories(): List<Directory> =
-        entries.values.filterIsInstance<Directory>()
-            .flatMap { it.flattenDirectories() } + this
+    override fun iterator(): Iterator<FilesystemEntry> = iterator {
+        yield(this@Directory);
+        this@Directory.children.values.forEach {
+            when (it) {
+                is Directory -> yieldAll(it.iterator())
+                else -> yield(it)
+            }
+        }
+    }
 }
 
 
@@ -25,23 +32,24 @@ class Day7 : AocDay<Int> {
 
     val totalSpace = 70_000_000
     val targetSpace = 30_000_000
-    override fun part1(input: List<String>): Int {
-        return parseDirectoryStructure(input)
-            .flattenDirectories()
+    override fun part1(input: List<String>): Int =
+        parseDirectoryStructure(input)
+            .iterator()
             .asSequence()
+            .filterIsInstance<Directory>()
             .map { it.totalSize() }
             .filter { it <= 100000 }
             .sortedByDescending { it }
             .sum()
-    }
 
 
     override fun part2(input: List<String>): Int {
         val root = parseDirectoryStructure(input)
         val totalUsed = root.totalSize()
         return root
-            .flattenDirectories()
+            .iterator()
             .asSequence()
+            .filterIsInstance<Directory>()
             .map { it.totalSize() }
             .sortedBy { it }
             .first { it + (totalSpace - totalUsed) >= targetSpace }
@@ -51,25 +59,30 @@ class Day7 : AocDay<Int> {
         val root = Directory()
         val stack = Stack<Directory>()
         input.forEach { line ->
-            if (line.startsWith("$ cd ")) {
-                when (val dir = line.substringAfter(" cd ")) {
-                    "/" -> {
-                        stack.clear()
-                        stack.push(root)
+            when {
+                line.startsWith("$ cd ") -> {
+                    when (val dir = line.substringAfter(" cd ")) {
+                        "/" -> {
+                            stack.clear()
+                            stack.push(root)
+                        }
+
+                        ".." -> stack.pop()
+                        else -> stack.push(stack.peek().children[dir] as Directory)
                     }
-                    ".." -> stack.pop()
-                    else -> stack.push(stack.peek().entries[dir] as Directory)
                 }
-            } else if (line == "$ ls") {
-                // ignore
-            } else {
-                // we are inside a ls
-                if (line.startsWith("dir ")) {
-                    stack.peek().entries[line.substringAfter(' ')] = Directory()
-                } else {
+
+                line.startsWith("$ ls") -> { /* Ignore */
+                }
+
+                line.startsWith("dir ") -> {
+                    stack.peek().children[line.substringAfter(' ')] = Directory()
+                }
+
+                else -> {
                     val size = line.substringBefore(' ').toInt()
                     val name = line.substringAfter(' ')
-                    stack.peek().entries[name] = File(size)
+                    stack.peek().children[name] = File(size)
                 }
             }
         }

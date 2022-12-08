@@ -5,5 +5,5 @@ class Day6Test : AocDayTest<Int>(
     7,
     1833,
     19,
-    0) {
+    3425) {
 }
